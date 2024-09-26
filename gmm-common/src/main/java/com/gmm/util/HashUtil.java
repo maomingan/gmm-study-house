@@ -49,18 +49,12 @@ public class HashUtil {
 		
 	}
 	
-	/*public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException {
 
-		System.out.println(getSHA2("320706199502061017"));
-		System.out.println(getSHA2("18700000001"));
-		System.out.println();
-		System.out.println(getSHA2("140105199403075330"));
-		System.out.println(getSHA2("13140706173"));
-		System.out.println();
-		System.out.println(getSHA2("320706199502061017"));
-		System.out.println(getSHA2("15251217440"));
+		System.out.println(getMD5("522631199108210010"));
+		System.out.println(getMD5("18767122586"));
 		System.out.println();
 
-	}*/
+	}
 	
 }
