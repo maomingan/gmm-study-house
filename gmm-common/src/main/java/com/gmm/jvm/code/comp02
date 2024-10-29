@@ -1,0 +1,11 @@
+package com.gmm.comp;
+
+import com.gmm.jvm.AbstractComp;
+
+public class Comp extends AbstractComp{
+
+    public void doRun(){
+        System.out.println("new comp02 run...");
+    }
+
+}
