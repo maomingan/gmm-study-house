@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.Random;
 
 /**
- * 限流策略1：漏桶算法
+ * 限流策略2：漏桶算法
  * @author Gmm
  * @date 2024/11/1
  */
@@ -57,49 +57,20 @@ public class LeakyBucket {
         }
     }
 
-    /**
-     * 刷新漏桶水量
-     */
-    private void refreshWater(){
-        // 获取当前秒
-        final int now = LocalDateTime.now().getSecond();
-        // 执行漏水
-        int leakCnt = (now - refreshTime) * rate;
-        // 计算剩余水量
-        int leftWater = water - leakCnt;
-        water = Math.max(0, leftWater);
-        // 更新最后更新时间
-        refreshTime = now;
-    }
-
-    /**
-     * 入桶
-     * @return
-     */
-    public synchronized boolean intoWater(){
-        // 刷新桶的水量
-        refreshWater();
-        // 如果桶未满，则水滴可以入桶
-        if(water < size){
-            water ++;
-            return true;
-        }
-        return false;
-    }
-
     public static void main(String[] args) {
 
         // 构建一个大小为5，处理速率为每秒处理1个水滴(请求)的漏桶
         LeakyBucket leakyBucket = new LeakyBucket(1, 5);
 
         Random random = new Random();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 20; i++) {
+            try {
+                Thread.sleep(random.nextInt(200));
+//                Thread.sleep(400);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             new Thread(() -> {
-                try {
-                    Thread.sleep(random.nextInt(200));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 log.info(Thread.currentThread().getName() + "请求是否被限流：" + leakyBucket.limited());
             }).start();
         }

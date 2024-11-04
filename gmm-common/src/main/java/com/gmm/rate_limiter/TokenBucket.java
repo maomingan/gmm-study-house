@@ -4,7 +4,7 @@ import com.google.common.util.concurrent.RateLimiter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 限流策略2：令牌桶
+ * 限流策略3：令牌桶
  * @author Gmm
  * @date 2024/11/1
  */
