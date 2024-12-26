@@ -5,9 +5,10 @@
     <packaging>pom</packaging>
     <modules>
         <module>starter</module>
-        <module>gmm-test</module>
+        <module>gmm-web</module>
         <module>gmm-common</module>
         <module>study-juc</module>
+        <module>gmm-warehouse</module>
     </modules>
 
     <parent>
