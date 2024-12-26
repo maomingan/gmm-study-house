@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: gmm-warehouse
+server:
+  port: 8999
+
+# 使用springboot默认的HikariCP作为连接池
+hive:
+  datasource:
+    url: jdbc:hive2://ddp1:10000/gmmdb
+    username: root
+    password: root
+    driver-class-name: org.apache.hive.jdbc.HiveDriver
+
