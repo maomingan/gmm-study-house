@@ -2,7 +2,9 @@ package com.gmm.score_skills;
 
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,18 +36,6 @@ public class ScoreTransformerWithTwoChar {
         }
     }
 
-    public static int getScore(String cutOff) {
-        String lowStr = cutOff.substring(0, 2);
-        StringBuffer stringBuffer = new StringBuffer();
-        for (int i = 0; i < lowStr.length(); i++) {
-            String binary = mapping.get(lowStr.charAt(i));
-            if (StringUtils.hasText(binary)) {
-                stringBuffer.append(binary);
-            }
-        }
-        return Integer.parseInt(stringBuffer.toString(), 2);
-    }
-
     public static String getCharString(int score) {
         String scoreBinary = Integer.toBinaryString(score);
         String score10Binary = String.format("%10s", scoreBinary).replace(' ','0');
@@ -57,9 +47,32 @@ public class ScoreTransformerWithTwoChar {
         return result;
     }
 
+    public static String getScoreInterval(String cutOff){
+        List<String> scoreList = new ArrayList<>();
+        for (int i = 0; i < cutOff.length(); i = i + 2) {
+            String twoStr = cutOff.substring(i, i + 2);
+            int score = getScore(twoStr);
+            scoreList.add(String.valueOf(score));
+        }
+        return String.join("-", scoreList);
+    }
+
+    public static int getScore(String twoStr) {
+        StringBuffer stringBuffer = new StringBuffer();
+        for (int i = 0; i < twoStr.length(); i++) {
+            String binary = mapping.get(twoStr.charAt(i));
+            if (StringUtils.hasText(binary)) {
+                stringBuffer.append(binary);
+            }
+        }
+        return Integer.parseInt(stringBuffer.toString(), 2);
+    }
+
     public static void main(String[] args) {
-        System.out.println(getCharString(772));
-        System.out.println(getScore("p4"));
+        String cutoff = "p4qv";
+        System.out.println(getScoreInterval(cutoff));
+        System.out.println(getScoreInterval("1000"));
+        System.out.println(getCharString(1000));
     }
 
 }
